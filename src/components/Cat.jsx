@@ -6,9 +6,7 @@ const Cat = () => {
     const { activity } = value;
 
     const _handleClick = (type) => {
-        dispatch({
-            type,
-        })
+        dispatch({ type })
     }
 
     return (
