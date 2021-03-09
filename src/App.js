@@ -1,12 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { useReducer } from 'react';
+import { StateProvider } from './context/index';
+import Cat from './components/Cat';
 
 function App() {
+  const initialState = {
+    activity: 'purring',
+  }
+
+  const contextReducer = (state, action) => {
+    switch (action.type) {
+      case 'ACTION_EAT':
+        return {
+          activity: 'eating'
+        }
+        case 'ACTION_NAP':
+          return {
+            activity: 'napping'
+          }
+        case 'ACTION_PLAY':
+          return {
+            activity: 'playing'
+          }
+      default:
+        return state;
+    }
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Cat React - Context</h1>
-      </header>
+      <StateProvider value={useReducer(contextReducer, initialState)}>
+        <h1>Context Demo</h1>
+        <Cat />
+      </StateProvider>
     </div>
   );
 }
